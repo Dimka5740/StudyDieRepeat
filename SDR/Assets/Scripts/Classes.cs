@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class Classes : MonoBehaviour
 {
-    string Theme;
-    string Text;
+    public string Theme;
+    public string Text;
     public Classes(string Theme, string Text)
     {
         this.Theme = Theme;
@@ -15,17 +15,17 @@ public abstract class Classes : MonoBehaviour
 
 public class StoryEvent : Classes
 {
-    string YesText;
-    int YesHealth;
-    int YesPsyhic;
-    int YesStudy;
-    int YesSosiety;
-    string NoText;
-    int NoHealth;
-    int NoPsyhic;
-    int NoStudy;
-    int NoSosiety;
-    bool Branch;
+    public string YesText;
+    public int YesHealth;
+    public int YesPsyhic;
+    public int YesStudy;
+    public int YesSosiety;
+    public string NoText;
+    public int NoHealth;
+    public int NoPsyhic;
+    public int NoStudy;
+    public int NoSosiety;
+    public bool Branch;
 
     public StoryEvent(string Theme, string Text,string YesText, int YesHealth,int YesPsyhic, int YesStudy, int YesSosiety, string NoText, int NoHealth, int NoPsyhic, int NoStudy, int NoSosiety,bool Branch) :base(Theme, Text)
     {

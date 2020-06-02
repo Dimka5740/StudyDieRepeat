@@ -483,7 +483,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.018, y: 0.14444445}
   m_AnchorMax: {x: 0.067, y: 0.24222223}
-  m_AnchoredPosition: {x: 447.99786, y: 1046.4}
+  m_AnchoredPosition: {x: 447.9992, y: 1046.4}
   m_SizeDelta: {x: 69.38553, y: -42.178932}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &445018048
@@ -1193,7 +1193,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.018, y: 0.14444445}
   m_AnchorMax: {x: 0.067, y: 0.24222223}
-  m_AnchoredPosition: {x: 447.99786, y: 1046.4}
+  m_AnchoredPosition: {x: 447.9992, y: 1046.4}
   m_SizeDelta: {x: 69.38553, y: -42.178932}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1192691353
@@ -1638,6 +1638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a5835a6b35098049a7d119ccab84cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textOfCard: {fileID: 1520016738}
   sl: {fileID: 1863975334}
 --- !u!4 &1586473241
 Transform:

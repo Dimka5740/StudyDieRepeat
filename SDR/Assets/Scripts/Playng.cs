@@ -42,7 +42,7 @@ public class Playng : MonoBehaviour
             if (Mathf.Abs(angle) % 180 == 0)
             {
                 isRotation = false;
-                img.fillAmount = 1;
+                //img.fillAmount = 1;
                 //text1.text = "fdggdg";
             }
             //rect.transform.Rotate(0, speed, 0);
