@@ -15,7 +15,7 @@ public class Playng : MonoBehaviour
     Quaternion rotationY;
     void Start()
     {
-        SwypeController.SwypeEvent += CheckSwype;
+        //SwypeController.SwypeEvent += CheckSwype;
         text1 = GetComponentsInChildren<Text>()[0];
         img = GameObject.Find("ImageHealth (1)").GetComponent<Image>();
         //rect = GetComponent<RectTransform>();

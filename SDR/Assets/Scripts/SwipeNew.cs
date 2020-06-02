@@ -8,16 +8,19 @@ public class SwipeNew : MonoBehaviour
 {
     //public GameObject Card;
     public Text textOfCard;
+    public float speed;
+    public StickerLogic sl;
+
     private int health, psycho, study, socio;
     private List<StoryEvent> MainList;
     private Logic bufLogic;
-    private bool isSecondText;
+    private bool isSecondSwype, isMoving;
     private DateTime end;
-
-    int i;
-    public StickerLogic sl;
-    Image img;
-    float fMovingSpeed = 1f;
+    private int i;
+    private Vector3 positionOfImg;
+    
+    private Image img, imgLittle;
+    
     // Start is called before the first frame update
     private TimeSpan TimeLeft()
     {
@@ -25,10 +28,13 @@ public class SwipeNew : MonoBehaviour
     }
     void Start()
     {
+        SwypeController.SwypeEvent += CheckSwype2;
         MainList = new List<StoryEvent>();
-        isSecondText = false;
+        isSecondSwype = isMoving = false;
         img = GameObject.Find("Sticker").GetComponent<Image>();
+        imgLittle = GameObject.Find("StickerLittle").GetComponent<Image>();
         i = 0;
+        positionOfImg = imgLittle.transform.position;
         #region
         MainList.Add(new StoryEvent("Учебная группа", "Привет Универ! Вы поступили в самый лучший университет города! Вы находитесь на линейке, рядом много первокурсников и среди них вы находите свою группу. В центре группы вещает какой-то крутой парень. Вы подходите к ним и этот парень говорит вам: Хэй, бро, меня зовут Паша Крутыш, а тебя ?  Вы хотите пожать ему руку?", "Пожимаете руку, внутренне успокоившись, что вас хорошо приняли. Продолжаете знакомиться с другими студентами. ", 0, 10, 0, 15, "Вы отказываете парню, поскольку уверены, что сами собираетесь быть лидером в группе.", 0, -10, 0, -15, false));
         MainList.Add(new StoryEvent("Учебная группа", "Пришло время забрать свои пропуски в универ. Сегодня последний день, а вам нужно торопиться домой. Хотите его забрать сейчас?", "Быстро забрав свой пропуск вы торопитесь домой и бежите по территории универа. Внезапно вы спотыкаетесь о бордюр и падаете в лужу! Эту ситуацию видят проходящие рядом третьекурсники и смеются с вас...", -5, -20, 0, -5, "Вы решаете попробовать забрать пропуск завтра и сегодня едете домой. Придя на следующий день в интернет-центр, вы получаете пропуск но на вас жалуется диспечтер универа и вам попадает от куратора группы", 0, -10, -10, 0, false));
@@ -48,49 +54,98 @@ public class SwipeNew : MonoBehaviour
 
         //заполнили всё говно
     }
+    private void CheckSwype2(SwypeController.SwypeType type)
+    {
+        switch (type)
+        {
+            case SwypeController.SwypeType.LEFT:
+                speed = -Mathf.Abs(speed);
+                if (isSecondSwype == false)
+                    SetChenges(MainList[i].NoText, MainList[i].NoHealth, MainList[i].NoPsyhic, MainList[i].NoStudy, MainList[i].NoSosiety);
+                else
+                    SetText();
+                break;
+            case SwypeController.SwypeType.RIGHT:
+                speed = Mathf.Abs(speed);
+                if (isSecondSwype == false)
+                    SetChenges(MainList[i].YesText, MainList[i].YesHealth, MainList[i].YesPsyhic, MainList[i].YesStudy, MainList[i].YesSosiety);
+                else
+                    SetText();
+                break;
+        }
+    }
 
+    private void SetText()
+    {
+        textOfCard.text = MainList[i].Text;
+        isSecondSwype = false;
+        isMoving = true;
+    }
+
+    private void SetChenges(string text, params int[] p)
+    {
+        isSecondSwype = true;
+        textOfCard.text = text;
+        sl.InduceRight(p[0], p[1], p[2], p[3]);
+        i++;
+        isMoving = true;
+    }
+    private void StickerGetFuckOut(float speed)
+    {
+        
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetMouseButton(0) && sl.isMouseOver)
+        if(isMoving)
         {
-            Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            img.transform.position = pos;
-        }
-        else
-        {
+            if (imgLittle.transform.position.x > 5f || imgLittle.transform.position.x < -5f)
+            {
+                isMoving = false;
+                imgLittle.transform.position = positionOfImg;
+            }
+            imgLittle.transform.position += new Vector3(speed * Time.deltaTime, 0);
             
-            img.transform.position = Vector2.MoveTowards(img.transform.position, new Vector2(0, 0), fMovingSpeed);
         }
-        //YES side
-        if (img.transform.position.x > 1)
-        {
-            img.color = Color.green;
-            if (isSecondText == false && TimeLeft() < TimeSpan.Zero)
-            {
-                textOfCard.text = MainList[i].YesText;
-                sl.InduceRight(MainList[i].YesHealth, MainList[i].YesPsyhic, MainList[i].YesStudy, MainList[i].YesSosiety);
-                i++;
-                isSecondText = true;
-                end = DateTime.Now.AddSeconds(2);
-            }
-            else { isSecondText = false; }
-        }
-        //NO side
-        else if (img.transform.position.x < -1)
-        {
-            img.color = Color.red;
-            if (Input.GetMouseButton(0) && isSecondText == false && TimeLeft() < TimeSpan.Zero)
-            {
-                textOfCard.text = MainList[i].NoText;
-                sl.InduceRight(MainList[i].NoHealth, MainList[i].NoPsyhic, MainList[i].NoStudy, MainList[i].NoSosiety);
-                i++;
-                isSecondText = true;
-                end = DateTime.Now.AddSeconds(2);
-            }
-            else { isSecondText = false; }
-        }
-        else img.color = Color.white;
+        //if (Input.GetMouseButton(0) && sl.isMouseOver)
+        //{
+        //    Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //    img.transform.position = pos;
+        //}
+        //else
+        //{
+            
+        //    img.transform.position = Vector2.MoveTowards(img.transform.position, new Vector2(0, 0), fMovingSpeed);
+        //}
+        ////YES side
+        //if (img.transform.position.x > 1)
+        //{
+        //    img.color = Color.green;
+        //    if (isSecondText == false && TimeLeft() < TimeSpan.Zero)
+        //    {
+        //        textOfCard.text = MainList[i].YesText;
+        //        sl.InduceRight(MainList[i].YesHealth, MainList[i].YesPsyhic, MainList[i].YesStudy, MainList[i].YesSosiety);
+        //        i++;
+        //        isSecondText = true;
+        //        end = DateTime.Now.AddSeconds(2);
+        //    }
+        //    else { isSecondText = false; }
+        //}
+        ////NO side
+        //else if (img.transform.position.x < -1)
+        //{
+        //    img.color = Color.red;
+        //    if (Input.GetMouseButton(0) && isSecondText == false && TimeLeft() < TimeSpan.Zero)
+        //    {
+        //        textOfCard.text = MainList[i].NoText;
+        //        sl.InduceRight(MainList[i].NoHealth, MainList[i].NoPsyhic, MainList[i].NoStudy, MainList[i].NoSosiety);
+        //        i++;
+        //        isSecondText = true;
+        //        end = DateTime.Now.AddSeconds(2);
+        //    }
+        //    else { isSecondText = false; }
+        //}
+        //else img.color = Color.white;
     }
 }
 
