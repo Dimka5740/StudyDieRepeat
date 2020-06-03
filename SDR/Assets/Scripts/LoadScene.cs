@@ -7,7 +7,7 @@ public class LoadScene : MonoBehaviour
 {
     public void Load()
     {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(1,LoadSceneMode.Single);
     }
     
 }

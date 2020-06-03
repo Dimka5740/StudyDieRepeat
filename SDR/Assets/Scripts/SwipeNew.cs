@@ -8,7 +8,8 @@ using UnityEngine.SceneManagement;
 public class SwipeNew : MonoBehaviour
 {
     //public GameObject Card;
-    public Text textOfCard, gameOverText;
+    public Text textOfCard;
+    public Text gameOverText;
     public float speed;
     public int timeOfLockSwype;
     public StickerLogic sl;
@@ -17,7 +18,7 @@ public class SwipeNew : MonoBehaviour
     private int health, psycho, study, socio;
     private List<StoryEvent> MainList;
     private Logic bufLogic;
-    private bool isSecondSwype, isMoving, gameOver;
+    public bool isSecondSwype, isMoving, isGameOver;
     private DateTime end;
     private int i;
     private Vector3 positionOfImg;
@@ -34,7 +35,7 @@ public class SwipeNew : MonoBehaviour
     {
         SwypeController.SwypeEvent += CheckSwype2;
         MainList = new List<StoryEvent>();
-        isSecondSwype = isMoving = gameOver = false;
+        isSecondSwype = isMoving = isGameOver = false;
         img = GameObject.Find("Sticker").GetComponent<Image>();
         imgLittle = GameObject.Find("StickerLittle").GetComponent<Image>();
         i = 0;
@@ -70,7 +71,7 @@ public class SwipeNew : MonoBehaviour
     }
     private void CheckSwype2(SwypeController.SwypeType type)
     {
-        if (gameOver == false)
+        if (isGameOver == false)
         {
             if (TimeLeft() < TimeSpan.Zero)
             {
@@ -97,7 +98,10 @@ public class SwipeNew : MonoBehaviour
         else
         {
             if (TimeLeft() < TimeSpan.Zero)
-                SceneManager.LoadScene("Menu");
+            {
+                SwypeController.SwypeEvent -= CheckSwype2;
+                SceneManager.LoadScene("Menu",LoadSceneMode.Single);
+            }
         }
     }
 
@@ -117,8 +121,9 @@ public class SwipeNew : MonoBehaviour
                     textOfCard.text = EndGame[i, j];
                     imgLittle.enabled = false;
                     img.enabled = false;
-                    gameOver = true;
+                    isGameOver = true;
                     gameOverText.enabled = true;
+                    break;
                 }    
             }
         }
@@ -135,7 +140,15 @@ public class SwipeNew : MonoBehaviour
     {
         isSecondSwype = true;
         textOfCard.text = text;
-        CheckEndGame(sl.InduceRight(p[0], p[1], p[2], p[3]));
+        bool[,] array = sl.InduceRight(p[0], p[1], p[2], p[3]);
+        for (int y = 0; y < 2; y++)
+        {
+            for (int t = 0; t < 4; t++)
+            {
+                print(array[y, t]);
+            }
+        }
+        CheckEndGame(array);
         i++;
         isMoving = true;
         TimerOn();
@@ -147,6 +160,8 @@ public class SwipeNew : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (i == MainList.Count)
+            isGameOver = true;
         if(isMoving)
         {
             if (imgLittle.transform.position.x > 3f || imgLittle.transform.position.x < -3f)

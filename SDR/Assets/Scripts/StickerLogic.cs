@@ -50,10 +50,10 @@ public class StickerLogic : MonoBehaviour
     {
         //TODO do something for YES
         FindIndicators();
-        imgHealth.fillAmount = imgHealth.fillAmount + rhe * 0.01f;
-        imgPsyhic.fillAmount = imgPsyhic.fillAmount + rps * 0.01f;
-        imgStudy.fillAmount = imgStudy.fillAmount + rst * 0.01f;
-        imgSocio.fillAmount = imgSocio.fillAmount + rso * 0.01f;
+        imgHealth.fillAmount = imgHealth.fillAmount + (float)rhe * 0.01f;
+        imgPsyhic.fillAmount = imgPsyhic.fillAmount + (float)rps * 0.01f;
+        imgStudy.fillAmount = imgStudy.fillAmount + (float)rst * 0.01f;
+        imgSocio.fillAmount = imgSocio.fillAmount + (float)rso * 0.01f;
         return CheckEndGame();
     }
     public bool[,] InduceLeft(int lhe, int lps, int lst, int lso)
