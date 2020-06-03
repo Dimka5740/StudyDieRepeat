@@ -56,11 +56,14 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Classes.cs" />
+     <Compile Include="Assets\Scripts\Data.cs" />
      <Compile Include="Assets\Scripts\EditBars.cs" />
+     <Compile Include="Assets\Scripts\EndGame.cs" />
      <Compile Include="Assets\Scripts\LoadScene.cs" />
      <Compile Include="Assets\Scripts\LogiсFlowCards.cs" />
      <Compile Include="Assets\Scripts\NewBehaviourScript.cs" />
      <Compile Include="Assets\Scripts\Playng.cs" />
+     <Compile Include="Assets\Scripts\ReadFromExcel.cs" />
      <Compile Include="Assets\Scripts\StickerLogic.cs" />
      <Compile Include="Assets\Scripts\SwipeNew.cs" />
      <Compile Include="Assets\Scripts\SwypeController.cs" />

@@ -17,6 +17,28 @@ public class StickerLogic : MonoBehaviour
     {
         isMouseOver = false;
     }
+
+    private bool[,] CheckEndGame()
+    {
+        bool[,] endGame = new bool[2, 4];
+        if (imgHealth.fillAmount >= 1)
+            endGame[0, 0] = true;
+        if (imgHealth.fillAmount <= 0)
+            endGame[1, 0] = true;
+        if (imgPsyhic.fillAmount >= 1)
+            endGame[0, 1] = true;
+        if (imgPsyhic.fillAmount <= 0)
+            endGame[1, 1] = true;
+        if (imgStudy.fillAmount >= 1)
+            endGame[0, 2] = true;
+        if (imgStudy.fillAmount <= 0)
+            endGame[1, 2] = true;
+        if (imgSocio.fillAmount >= 1)
+            endGame[0, 3] = true;
+        if (imgSocio.fillAmount <= 0)
+            endGame[1, 3] = true;
+        return endGame;
+    }
     private void FindIndicators()
     {
         imgHealth = GameObject.Find("ImageHealth (1)").GetComponent<Image>();
@@ -24,7 +46,7 @@ public class StickerLogic : MonoBehaviour
         imgStudy = GameObject.Find("ImageStudy (1)").GetComponent<Image>();
         imgSocio = GameObject.Find("ImageSocio (1)").GetComponent<Image>();
     }
-    public void InduceRight(int rhe, int rps, int rst, int rso)
+    public bool[,] InduceRight(int rhe, int rps, int rst, int rso)
     {
         //TODO do something for YES
         FindIndicators();
@@ -32,8 +54,9 @@ public class StickerLogic : MonoBehaviour
         imgPsyhic.fillAmount = imgPsyhic.fillAmount + rps * 0.01f;
         imgStudy.fillAmount = imgStudy.fillAmount + rst * 0.01f;
         imgSocio.fillAmount = imgSocio.fillAmount + rso * 0.01f;
+        return CheckEndGame();
     }
-    public void InduceLeft(int lhe, int lps, int lst, int lso)
+    public bool[,] InduceLeft(int lhe, int lps, int lst, int lso)
     {
         //TODO do something for NO
         FindIndicators();
@@ -41,5 +64,6 @@ public class StickerLogic : MonoBehaviour
         imgPsyhic.fillAmount = (float)(imgPsyhic.fillAmount + (float)lps * 0.01);
         imgStudy.fillAmount = (float)(imgStudy.fillAmount + (float)lst * 0.01);
         imgSocio.fillAmount = (float)(imgSocio.fillAmount + (float)lso * 0.01);
+        return CheckEndGame();
     }
 }
