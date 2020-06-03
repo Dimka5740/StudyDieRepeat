@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\LogiсFlowCards.cs" />
      <Compile Include="Assets\Scripts\NewBehaviourScript.cs" />
      <Compile Include="Assets\Scripts\Playng.cs" />
+     <Compile Include="Assets\Scripts\ReadFromExcel.cs" />
      <Compile Include="Assets\Scripts\StickerLogic.cs" />
      <Compile Include="Assets\Scripts\SwipeNew.cs" />
      <Compile Include="Assets\Scripts\SwypeController.cs" />

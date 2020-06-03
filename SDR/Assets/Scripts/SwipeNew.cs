@@ -7,6 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class SwipeNew : MonoBehaviour
 {
+<<<<<<< Updated upstream
+=======
+    public Text textOfCard;
+    private int health, psyhic, study, socio;
+>>>>>>> Stashed changes
     //public GameObject Card;
     public Text textOfCard, gameOverText;
     public float speed;
@@ -71,6 +76,30 @@ public class SwipeNew : MonoBehaviour
     private void CheckSwype2(SwypeController.SwypeType type)
     {
         if (gameOver == false)
+<<<<<<< Updated upstream
+        {
+            if (TimeLeft() < TimeSpan.Zero)
+            {
+                speed = 10f;
+                switch (type)
+                {
+                    case SwypeController.SwypeType.LEFT:
+                        speed = -Mathf.Abs(speed);
+                        if (isSecondSwype == false)
+                            SetChenges(MainList[i].NoText, MainList[i].NoHealth, MainList[i].NoPsyhic, MainList[i].NoStudy, MainList[i].NoSosiety);
+                        else
+                            SetText();
+                        break;
+                    case SwypeController.SwypeType.RIGHT:
+                        speed = Mathf.Abs(speed);
+                        if (isSecondSwype == false)
+                            SetChenges(MainList[i].YesText, MainList[i].YesHealth, MainList[i].YesPsyhic, MainList[i].YesStudy, MainList[i].YesSosiety);
+                        else
+                            SetText();
+                        break;
+                }
+            }
+=======
         {
             if (TimeLeft() < TimeSpan.Zero)
             {
@@ -98,6 +127,12 @@ public class SwipeNew : MonoBehaviour
         {
             if (TimeLeft() < TimeSpan.Zero)
                 SceneManager.LoadScene("Menu");
+>>>>>>> Stashed changes
+        }
+        else
+        {
+            if (TimeLeft() < TimeSpan.Zero)
+                SceneManager.LoadScene("Menu");
         }
     }
 
@@ -106,12 +141,24 @@ public class SwipeNew : MonoBehaviour
         end = DateTime.Now.AddSeconds(timeOfLockSwype);
     }
 
+<<<<<<< Updated upstream
+=======
+    private void TimerOn()
+    {
+        end = DateTime.Now.AddSeconds(timeOfLockSwype);
+    }
+
+>>>>>>> Stashed changes
     private void CheckEndGame(bool [,] array)
     {
         for (int i = 0; i < 2; i++)
         {
             for (int j = 0; j < 4; j++)
             {
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
                 if(array[i,j] == true)
                 {
                     textOfCard.text = EndGame[i, j];
@@ -120,6 +167,12 @@ public class SwipeNew : MonoBehaviour
                     gameOver = true;
                     gameOverText.enabled = true;
                 }    
+<<<<<<< Updated upstream
+=======
+=======
+                sl.InduceRight(health, psyhic, study, socio);
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
             }
         }
     }
