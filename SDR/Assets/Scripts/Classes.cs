@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class Classes : MonoBehaviour
 {
@@ -26,8 +24,9 @@ public class StoryEvent : Classes
     public int NoStudy;
     public int NoSosiety;
     public bool Branch;
+    public string img;
 
-    public StoryEvent(string Theme, string Text,string YesText, int YesHealth,int YesPsyhic, int YesStudy, int YesSosiety, string NoText, int NoHealth, int NoPsyhic, int NoStudy, int NoSosiety,bool Branch) :base(Theme, Text)
+    public StoryEvent(string Theme, string Text,string YesText, int YesHealth,int YesPsyhic, int YesStudy, int YesSosiety, string NoText, int NoHealth, int NoPsyhic, int NoStudy, int NoSosiety,bool Branch,string img) :base(Theme, Text)
     {
         this.YesText = YesText;
         this.YesHealth = YesHealth;
@@ -40,6 +39,7 @@ public class StoryEvent : Classes
         this.NoStudy = NoStudy;
         this.NoSosiety = NoSosiety;
         this.Branch = Branch;
+        this.img = img;
     }
 }
 
