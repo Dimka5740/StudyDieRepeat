@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class SwipeNew : MonoBehaviour
 {
@@ -99,6 +100,7 @@ public class SwipeNew : MonoBehaviour
             if (TimeLeft() < TimeSpan.Zero)
             {
                 SwypeController.SwypeEvent -= CheckSwype2;
+                SceneManager.LoadScene("Menu");
             }
         }
     }
@@ -171,9 +173,12 @@ public class SwipeNew : MonoBehaviour
             {
                 speed = 0;
                 isMoving = false;
-                if (i < MainList.Count - 1 && isSecondSwype == false)
-                    img.sprite = Resources.Load<Sprite>("Sprites/" + MainList[i + 1].img);
-                imgLittle.sprite = Resources.Load<Sprite>("Sprites/" + MainList[i].img);
+                if (i < MainList.Count - 1)//НУЖНО СДЕЛАТЬ НОРМАЛЬНО, СЕЙЧАС НЕ УСПЕВАЮ ТАК КАК СДАЧА ЧЕРЕЗ ПОЛ ЧАСА
+                {
+                    if(isSecondSwype == false)
+                        img.sprite = Resources.Load<Sprite>("Sprites/" + MainList[i + 1].img);
+                    imgLittle.sprite = Resources.Load<Sprite>("Sprites/" + MainList[i].img);
+                }
                 imgLittle.transform.position = positionOfImg;
                 //SetImage();
             }

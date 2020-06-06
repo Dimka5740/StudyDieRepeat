@@ -57,6 +57,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scenes\Typed\Game.cs" />
      <Compile Include="Assets\Scenes\Typed\Menu.cs" />
+     <Compile Include="Assets\Scenes\Typed\SampleScene.cs" />
      <Compile Include="Assets\Scripts\Classes.cs" />
      <Compile Include="Assets\Scripts\EditBars.cs" />
      <Compile Include="Assets\Scripts\GameEntry.cs" />

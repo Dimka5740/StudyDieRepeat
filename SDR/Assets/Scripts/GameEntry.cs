@@ -18,7 +18,19 @@ public class GameEntry : MonoBehaviour, ISceneLoadHandler<bool>
     public void Clicked()
     {
         stageOfLearning++;
-        
+        switch (stageOfLearning)
+        {
+            case 0: AboutStats(); break;
+            case 1: AboutStickers(); break;
+            case 2: AboutText(); break;
+            default:
+                stats.SetActive(true);
+                sticker.enabled = true;
+                sticker2.enabled = true;
+                textOfCard.enabled = true;
+                learning.SetActive(false);
+                break;
+        }
     }
     public void AboutText()
     {
@@ -55,10 +67,6 @@ public class GameEntry : MonoBehaviour, ISceneLoadHandler<bool>
             stageOfLearning = 0;
             AboutStats();
         }
-        else
-        {
-            stageOfLearning = 5;
-        }
     }
     private void Start()
     {
@@ -68,18 +76,6 @@ public class GameEntry : MonoBehaviour, ISceneLoadHandler<bool>
     }
     private void Update()
     {
-        switch (stageOfLearning)
-        {
-            case 0: AboutStats(); break;
-            case 1: AboutStickers(); break;
-            case 2: AboutText(); break;
-            default:
-                stats.SetActive(true);
-                sticker.enabled = true;
-                sticker2.enabled = true;
-                textOfCard.enabled = true;
-                learning.SetActive(false);
-                break;
-        }
+        
     }
 }
