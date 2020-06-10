@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
-using IJunior.TypedScenes;
 using UnityEngine.UI;
 
-public class GameEntry : MonoBehaviour, ISceneLoadHandler<bool>
+public class GameEntry : MonoBehaviour
 {
     public GameObject learning;
     public Text textOfCard;
@@ -59,20 +58,16 @@ public class GameEntry : MonoBehaviour, ISceneLoadHandler<bool>
         sticker2.enabled = false;
 
     }
-    public void OnSceneLoaded(bool isFirstGame)
+    private void Start()
     {
-        if (isFirstGame == true)
+        textLearning = learning.transform.GetComponentInChildren<Text>();
+        rectLearning = learning.transform.GetComponent<RectTransform>();
+        if (Data.isFirstGame == true)
         {
             learning.SetActive(true);
             stageOfLearning = 0;
             AboutStats();
         }
-    }
-    private void Start()
-    {
-        textLearning = learning.transform.GetComponentInChildren<Text>();
-        rectLearning = learning.transform.GetComponent<RectTransform>();
-        
     }
     private void Update()
     {

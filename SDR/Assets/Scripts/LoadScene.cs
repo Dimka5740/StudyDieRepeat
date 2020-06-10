@@ -1,25 +1,26 @@
 ﻿using UnityEngine;
-using IJunior.TypedScenes;
+using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
     public GameObject learning, buttonPlay, buttonExit;
-    bool isFirstGame;
+    //bool isFirstGame;
+
+    private void GoToGame()
+    {
+        SceneManager.LoadScene("Game");
+    }
+
     public void OnClickYes()
     {
-        isFirstGame = true;
-        learning.SetActive(false);
-        buttonPlay.SetActive(true);
-        buttonExit.SetActive(true);
-        Game.Load(isFirstGame);
+        Data.isFirstGame = true;
+        GoToGame();
     }
+
     public void OnClickNo()
     {
-        isFirstGame = false;
-        learning.SetActive(false);
-        buttonPlay.SetActive(true);
-        buttonExit.SetActive(true);
-        Game.Load(isFirstGame);
+        Data.isFirstGame = false;
+        GoToGame();
     }
     public void Load()
     {

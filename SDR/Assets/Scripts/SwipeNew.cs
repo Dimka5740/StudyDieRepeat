@@ -69,6 +69,14 @@ public class SwipeNew : MonoBehaviour
 
         //заполнили всё говно
     }
+    public void OpeningMenu()
+    {
+        SwypeController.SwypeEvent -= CheckSwype2;
+    }
+    public void ClosingMenu()
+    {
+        SwypeController.SwypeEvent += CheckSwype2;
+    }
     private void CheckSwype2(SwypeController.SwypeType type)
     {
         if (isGameOver == false)
