@@ -36,8 +36,8 @@ public class GameEntry : MonoBehaviour
         stats.SetActive(false);
         sticker.enabled = false;
         sticker2.enabled = false;
-        rectLearning.anchorMin = new Vector2(0.05f, 0.20f);
-        rectLearning.anchorMax = new Vector2(0.95f, 0.5f);
+        rectLearning.anchorMin = new Vector2(0.05f, 0.15f);
+        rectLearning.anchorMax = new Vector2(0.95f, 0.45f);
         textLearning.text = "Это текст с описанием происходящей ситуации. Сначала Вам будет предложено сделать выбор, который повлияет на твои показатели, затем то, что из этого вышло. Для положительного выбора - свайп вправо, для отрицательного - влево. Удачи!";
         textOfCard.enabled = true;
     }
